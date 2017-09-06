@@ -31,11 +31,13 @@ const app = new Clarifai.App({
 });
 
 function analyzeImage() {
+    // Clean list
+    var resultList = document.getElementById("resultList");
+    resultList.innerHTML = "";
 
     var imageSource = document.getElementById("url").value;
     app.models.predict("aaa03c23b3724a16a56b629203edc62c", imageSource).then(
         function (response) {
-            debugger;
             var resultList = document.getElementById("resultList");
 
             var concepts = response.outputs[0].data.concepts;
@@ -43,6 +45,7 @@ function analyzeImage() {
                 var li = document.createElement("li");
                 var conceptText = "Concept : " + concepts[i].name + ".  Certainty: " + concepts[i].value;
                 li.appendChild(document.createTextNode(conceptText));
+                li.className = "list-group-item";
                 resultList.appendChild(li);
             }
         },
