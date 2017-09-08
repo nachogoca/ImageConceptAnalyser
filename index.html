@@ -1,28 +1,79 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1>Image analyzer</h1>
+
+    <!-- Main -->
+    <div id="main">
+        <section class="wrapper style1">
+            <div class="inner">
+                <header class="align-center">
+                    <h2>Image analyzer</h2>
+                    <p>A tool for image understanding</p>
+                    <p>By <a href="https://github.com/nachogoca">nachogoca</a></p>
+                </header>
+            </div>
+        </section>
+        <section class="wrapper style2">
+            <div class="inner">
+                <p>Insert image URL</p>
+                <input class="form-control" type="text" id="url" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Lake_Bondhus_Norway_2862.jpg/1280px-Lake_Bondhus_Norway_2862.jpg">
+                <div class="align-center">
+                    <p></p>
+                    <button class="button" onclick="analyzeImage()">Analyze!</button>
+                    <p></p>
+                </div>
+            </div>
+            <div class="align-center">
+                <img id="img" style="display: none;" src="" height="650" alt="Image preview" />
+            </div>
+            <div>
+                <ol class="list-group" id="resultList"></ol>
+            </div>
+            <div align="center" id="tables" style="display:none;">
+                <div class="table-wrapper" id="table" style="display:inline-block;">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Certainty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body1">
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display:inline-block;">
+                </div>
+                <div class="table-wrapper" id="table" style="display:inline-block;">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Certainty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body2">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
-    <div>
-        <p>Insert image URL</p>
-        <input class="form-control" type="text" id="url">
-        <div>
-            <button class="btn btn-primary" onclick="loadImage()">Preview image</button>
-            <button class="btn btn-primary" onclick="analyzeImage()">Analyze image</button>
-        </div>
     </div>
-    <div>
-        <img id="img" src="" height="400" alt="Image preview" />
+    </section>
     </div>
-    <div>
-        <ol class="list-group" id="resultList"></ol>
-    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
     <script src="bundle.js"></script>
     <script src="logic.js"></script>
 </body>

@@ -3,6 +3,7 @@ function loadImage() {
     var image = document.getElementById("img");
 
     image.src = imageUrl;
+    image.style.display = "";
 }
 
 function handleFileUpload(doc) {
@@ -31,22 +32,35 @@ const app = new Clarifai.App({
 });
 
 function analyzeImage() {
+    loadImage();
     // Clean list
-    var resultList = document.getElementById("resultList");
-    resultList.innerHTML = "";
+    document.getElementById("table-body1").innerHTML = "";
+    document.getElementById("table-body2").innerHTML = "";
+
+    var tableDiv = document.getElementById("tables");
+    debugger;
+    tableDiv.style.display = "";
 
     var imageSource = document.getElementById("url").value;
     app.models.predict("aaa03c23b3724a16a56b629203edc62c", imageSource).then(
         function (response) {
             var resultList = document.getElementById("resultList");
+            var tbody1 = document.getElementById("table-body1");
+            var tbody2 = document.getElementById("table-body2");
+            var tables = [tbody1, tbody2];
 
             var concepts = response.outputs[0].data.concepts;
             for (let i = 0; i < concepts.length; i++) {
-                var li = document.createElement("li");
-                var conceptText = "Concept : " + concepts[i].name + ".  Certainty: " + concepts[i].value;
-                li.appendChild(document.createTextNode(conceptText));
-                li.className = "list-group-item";
-                resultList.appendChild(li);
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                td1.appendChild(document.createTextNode(concepts[i].name));
+
+                var td2 = document.createElement("td");
+                td2.appendChild(document.createTextNode(concepts[i].value));
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tables[Math.floor(i / 10)].appendChild(tr);
             }
         },
         function (err) {
